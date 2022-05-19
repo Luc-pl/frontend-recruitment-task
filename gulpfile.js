@@ -8,11 +8,13 @@ const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 var replace = require('gulp-replace');
+const browserSync = require('browser-sync').create();
 
 // File paths
 const files = { 
     scssPath: 'src/scss/**/*.scss',
-    jsPath: 'src/js/**/*.js'
+    jsPath: 'src/js/**/*.js',
+    htmlPath: './*.html'
 };
 
 function scssTask(){    
@@ -22,6 +24,7 @@ function scssTask(){
         .pipe(postcss([ autoprefixer(), cssnano() ])) // PostCSS plugins
         .pipe(sourcemaps.write('.')) // write sourcemaps file in current directory
         .pipe(dest('dist')
+        .pipe(browserSync.stream())
     ); // put final CSS in dist folder
 }
 
@@ -43,9 +46,20 @@ function cacheBustTask(){
 }
 
 function watchTask(){
-    watch([files.scssPath, files.jsPath], 
-        parallel(scssTask, jsTask));    
+    watch([files.scssPath, files.jsPath, files.htmlPath], 
+        parallel(scssTask, jsTask),
+        browserSync.init({
+            server: {
+                baseDir: "./"
+            },
+            notify: false, 
+            //host: "192.168.0.24",
+            //port: 3000,
+            open: true,
+            //browser: "google chrome" //https://stackoverflow.com/questions/24686585/gulp-browser-sync-open-chrome-only
+        }));
 }
+
 
 exports.default = series(
     parallel(scssTask, jsTask), 
