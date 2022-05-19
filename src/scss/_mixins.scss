@@ -1,0 +1,14 @@
+@mixin card-content {
+    p {
+        position: absolute;
+        width: 380px;
+        height: 96px;
+        left: calc(50% - 380px/2 + 300px);
+        top: calc(50% - 96px/2 - 222px);
+        font-family: $font-text;
+        font-style: normal;
+        font-weight: 300;
+        font-size: $paragraph-font-size;
+        line-height: $line-height;
+    }
+}
