@@ -11,7 +11,7 @@ var replace = require('gulp-replace');
 const browserSync = require('browser-sync').create();
 
 // File paths
-const files = { 
+const files = {
     scssPath: 'src/scss/**/*.scss',
     jsPath: 'src/js/**/*.js',
     htmlPath: './*.html'
@@ -24,8 +24,14 @@ function scssTask(){
         .pipe(postcss([ autoprefixer(), cssnano() ])) // PostCSS plugins
         .pipe(sourcemaps.write('.')) // write sourcemaps file in current directory
         .pipe(dest('dist')
-        .pipe(browserSync.stream())
     ); // put final CSS in dist folder
+}
+
+function htmlTask() {
+    return src([
+        files.htmlPath
+        ])
+        .pipe(browserSync.stream())
 }
 
 function jsTask(){
@@ -47,7 +53,7 @@ function cacheBustTask(){
 
 function watchTask(){
     watch([files.scssPath, files.jsPath, files.htmlPath], 
-        parallel(scssTask, jsTask),
+        parallel(scssTask, jsTask, htmlTask),
         browserSync.init({
             server: {
                 baseDir: "./"
@@ -62,7 +68,7 @@ function watchTask(){
 
 
 exports.default = series(
-    parallel(scssTask, jsTask), 
+    parallel(scssTask, jsTask, htmlTask), 
     cacheBustTask,
     watchTask
 );
