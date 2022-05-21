@@ -1,14 +1,21 @@
 @mixin card-content {
-    p {
-        position: absolute;
+
+    .card-title {
+        margin: 0;
+        font-family: $font-text;
+        font-weight: 700;
+        font-size: $title-font-size;
+        color: $color-text;
+    }
+
+    .card-description {
         width: 380px;
         height: 96px;
-        left: calc(50% - 380px/2 + 300px);
-        top: calc(50% - 96px/2 - 222px);
         font-family: $font-text;
-        font-style: normal;
         font-weight: 300;
         font-size: $paragraph-font-size;
         line-height: $line-height;
+        color: $color-text;
+        margin: 24px 0 32px 0;
     }
 }

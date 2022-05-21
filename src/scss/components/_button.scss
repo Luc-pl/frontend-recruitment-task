@@ -1,1 +1,16 @@
+.btn {
+    padding: 16px 40px;
+    gap: 10px;
+    width: 128px;
+    height: 48px;
+    border-radius: 32px;
+    border: none;
+    background-color: $color-module-button;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
 
+    &:hover {
+        background-color: $color-module-button-hover;
+    }
+}
