@@ -1,4 +1,12 @@
 .img-sea {
     width: 505px;
     height: 330px;
+    object-fit: fill;
+}
+
+@media (max-width: 767px) {
+
+    .img-sea {
+        width: auto;
+    } 
 }
