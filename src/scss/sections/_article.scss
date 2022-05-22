@@ -1,8 +1,15 @@
 article {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-wrap: nowrap;
+    justify-content: center;
     align-items: center;
     gap: 95px;
-    margin: 96px 0 534px 230px;
+    
+}
+
+@media (max-width: 767px) {
+
+    article {
+        flex-wrap: wrap;
+    }    
 }
