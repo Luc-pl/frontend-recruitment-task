@@ -39,7 +39,7 @@ window.onload = () => {
 function elementClick() {
   counter = counter+1;   
   infoClick.innerText = counter + ` times`;
-  localStorage.setItem("counter", JSON.stringify(counter));
+  localStorage.setItem('counter', JSON.stringify(counter));
 
   if (counter == 5) {
     btn.removeEventListener("click", elementClick);  
@@ -48,14 +48,17 @@ function elementClick() {
     el.innerText = `Reset Now!`;
     const span = document.querySelector(".btn-reset");
     span.appendChild(el);
+
   }    
 }
 btn.addEventListener("click", elementClick);
 
+/* Reset counter */
 
 const btnReset = document.querySelector(".btn-reset");
 
-function localStorageClickClear() {
-  localStorage.clear('counter'); 
+function localStorageClickClear() { 
+  infoClick.innerText = `0 times`; 
+  window.location.reload(localStorage.clear('counter'));   
 }
 btnReset.addEventListener("click", localStorageClickClear);
